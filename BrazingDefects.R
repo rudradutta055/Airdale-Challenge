@@ -1,18 +1,19 @@
 library(readxl)
 
+# 1. Load your Excel file from Documents via pop-up window
 df <- read_excel(file.choose())
 
 # Filter for Brazing defects and plot
-brazing_df <- subset(df, rework_defect_category == "Brazing")
+##brazing_df <- subset(df, rework_defect_category == "Brazing")
 
-boxplot(warranty_cost ~ coil_supplier,
-        data = brazing_df,
-        main = "Warranty Cost of Brazing Defects by Coil Supplier",
-        xlab = "Coil Supplier",
-        ylab = "Warranty Cost ($)",
-        col = c("lightblue", "salmon", "lightgreen"))
+##boxplot(warranty_cost ~ coil_supplier,
+        #data = brazing_df,
+        #main = "Warranty Cost of Brazing Defects by Coil Supplier",
+        #xlab = "Coil Supplier",
+        #ylab = "Warranty Cost ($)",
+        #col = c("lightblue", "salmon", "lightgreen"))
 
-
+# 2. Calculate Total Defects and Brazing Defects for each supplier
 total_defects   <- table(df$coil_supplier)
 brazing_defects <- table(factor(df$coil_supplier[df$rework_defect_category == "Brazing"], 
                                 levels = names(total_defects)))
